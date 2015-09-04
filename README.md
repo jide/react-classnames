@@ -5,7 +5,6 @@ import classNames from 'react-classnames';
 
 @classNames
 export default class Demo extends React.Component {
-
   render() {
     return (
       <div>
@@ -15,7 +14,6 @@ export default class Demo extends React.Component {
       </div>
     );
   }
-
 };
 ```
 
