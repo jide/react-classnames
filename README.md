@@ -21,7 +21,7 @@ export default class Demo extends React.Component {
 ```
 
 Generates :
-```jsx
+```js
 <div class='Demo'>
   <p class='Demo__highlight'>
     Some child
@@ -38,11 +38,19 @@ Use your beloved preprocessor, e.g. less :
 }
 ```
 
+Customize the component namespace :
+```js
+@classNames('my-demo-component')
+```
+
 Use the factory to customize :
-```jsx
+```js
 import { factory } from '../src';
 const classNames = factory(React, { separator: '--', propsName: 'cx' });
 ```
+
+Cleanly wrapped :
+![alt tag](https://raw.github.com/jide/react-classnames/screenshot.png)
 
 All of this works :
 ```js
