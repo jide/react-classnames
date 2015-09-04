@@ -44,7 +44,7 @@ Customize the component namespace :
 
 Use the factory to customize :
 ```js
-import { factory } from '../src';
+import { factory } from 'react-classnames';
 const classNames = factory(React, { separator: '--', propsName: 'cx' });
 ```
 
