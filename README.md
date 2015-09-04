@@ -1,7 +1,7 @@
 # react-classnames
 
 ```js
-import classNames from '../src';
+import classNames from 'react-classnames';
 
 @classNames
 export default class Demo extends React.Component {
@@ -63,7 +63,7 @@ All of this works :
 
 A more complete example :
 ```js
-import classNames from '../src';
+import classNames from 'react-classnames';
 
 @classNames
 export default class Demo extends React.Component {
