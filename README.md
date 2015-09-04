@@ -1,4 +1,3 @@
-[![build status](https://secure.travis-ci.org/synchronized/react-classnames.png)](http://travis-ci.org/synchronized/react-classnames) [![bitHound Score](https://www.bithound.io/github/synchronized/react-classnames/badges/score.svg)](https://www.bithound.io/github/synchronized/react-classnames) [![Dependency Status](https://david-dm.org/synchronized/react-classnames.svg)](https://david-dm.org/synchronized/react-classnames)
 # react-classnames
 
 ```js
@@ -50,6 +49,7 @@ const classNames = factory(React, { separator: '--', propsName: 'cx' });
 ```
 
 Cleanly wrapped :
+
 ![screenshot](https://cloud.githubusercontent.com/assets/333073/9687955/9ebade8e-532c-11e5-835e-0434bd3e4e2f.png)
 
 All of this works :
