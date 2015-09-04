@@ -1,30 +1,90 @@
 [![build status](https://secure.travis-ci.org/synchronized/react-classnames.png)](http://travis-ci.org/synchronized/react-classnames) [![bitHound Score](https://www.bithound.io/github/synchronized/react-classnames/badges/score.svg)](https://www.bithound.io/github/synchronized/react-classnames) [![Dependency Status](https://david-dm.org/synchronized/react-classnames.svg)](https://david-dm.org/synchronized/react-classnames)
-# react-classnames - Boilerplate for React.js components
-
-This is a simple boilerplate that has been developed to make it easier to develop React components. Check out [SurviveJS - Webpack and React](http://synchronized.com/) to dig deeper into the topic.
-
-> IMPORTANT! If you use Jest for testing and rely on **react/addons**, you should depend on that at */src*. Otherwise you might end up getting mysterious failures when running tests at Travis. If this isn't done, test and library code end up using different instances of React and you will get failures!
-
-## Basic Usage
-
-* Replacing meta information  - **npm run replace-meta** - This will allow you to update project metadata (GitHub user/project). Note that this can be potentially dangerous since it does just a naive search/replace over *README.md* and *package.json*!
-* Linting - **npm run lint**
-* Testing - **npm test** - This will lint too.
-* Developing - **npm start** - This will run a server at *localhost:3000* and use Hot Module Reloading.
-* Demo deployment - **npm run gh-pages** and **npm run deploy-gh-pages** - Demo will contain *README.md* by default and comes with simple styling based on Pure.
-* Generating a distribution version - **npm run dist-all** - This will generate `/dist` (UMD bundle + minified UMD bundle) and `/dist-modules`. Latter contains a version of `/src` that has been run through babel. It is meant for NPM users.
-
-Note that there are hooks for `npm version`. The system will run tests, generate a distribution bundle and include that into the version commit. This can fail in case dist doesn't contain any changes! After that has completed it will generate GitHub Pages and deploy a new version.
+# react-classnames
 
 ```js
-var a = 5;
-var b = 10;
+import classNames from '../src';
 
-// just trying out code highlighting feature here
-console.log(a + b);
+@classNames
+export default class Demo extends React.Component {
+
+  render() {
+    return (
+      <div>
+        <p classNames='highlight'>
+          Some child
+        </p>
+      </div>
+    );
+  }
+
+};
 ```
 
-## License
+Generates :
+```jsx
+<div class='Demo'>
+  <p class='Demo__highlight'>
+    Some child
+  </p>
+</div>
+```
 
-react-classnames is available under MIT. See LICENSE for more details.
+Use your beloved preprocessor, e.g. less :
+```less
+.Main {
+  &__highlight {
+    color: blue;
+  }
+}
+```
 
+Use the factory to customize :
+```jsx
+import { factory } from '../src';
+const classNames = factory(React, { separator: '--', propsName: 'cx' });
+```
+
+All of this works :
+```js
+<div classNames='some-class'/>
+<div classNames='some-class some-other'/>
+<div classNames={ ['some-class', 'some-other'] }/>
+<div className='regular-class other-regular-class' classNames={ ['some-class'] }/>
+<div classNames={ [true && 'some-class'] }/>
+```
+
+A more complete example :
+```js
+import classNames from '../src';
+
+@classNames
+export default class Demo extends React.Component {
+
+  constructor(...args) {
+    super(...args);
+
+    this.state = {
+      toggled: false
+    };
+  }
+
+  handleToggle() {
+    this.setState({
+      toggled: !this.state.toggled
+    });
+  }
+
+  render() {
+    return (
+      <div className='test' classNames='test2 test3'>
+        <p>This is the root of the component <code>Demo</code>. It will get the <code>Demo</code> class and can have other <code>className</code> and <code>classNames</code> props.</p>
+        <p><button onClick={ ::this.handleToggle }>Toggle</button></p>
+        <p classNames={ ['highlight', this.state.toggled && 'toggled'] }>
+          This paragraph has classNames that will be prefixed with <code>Demo</code>. It is blue when toggled.
+        </p>
+      </div>
+    );
+  }
+
+};
+```
