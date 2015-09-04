@@ -50,7 +50,7 @@ const classNames = factory(React, { separator: '--', propsName: 'cx' });
 ```
 
 Cleanly wrapped :
-![alt tag](https://raw.githubusercontent.com/jide/react-classnames/master/screenshot.png)
+![screenshot](https://cloud.githubusercontent.com/assets/333073/9687955/9ebade8e-532c-11e5-835e-0434bd3e4e2f.png)
 
 All of this works :
 ```js
