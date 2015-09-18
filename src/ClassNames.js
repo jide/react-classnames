@@ -5,27 +5,27 @@ const getDisplayName = Component => Component.displayName || Component.name || '
 const factory = ({ propName = 'classNames' }) => {
   return WrappedComponent => {
     const convertToClassName = (element) => {
-      if (typeof element.type ==='string' && element.props) {
-          let props = {};
+      if (element.props) {
+        let props = {};
 
-          if (element.props[propName]) {
-            props.className = [element.props.className]
-              .concat(element.props[propName])
-              .filter(className => !!className)
-              .join(' ');
-          }
-
-          if (element.props.children) {
-            props.children = Array.isArray(element.props.children) ?
-              element.props.children.map(child => convertToClassName(child)) :
-              convertToClassName(element.props.children);
-          }
-
-          return React.cloneElement(element, props);
+        if (element.props[propName]) {
+          props.className = [element.props.className]
+            .concat(element.props[propName])
+            .filter(className => !!className)
+            .join(' ');
         }
-        else {
-          return element;
+
+        if (element.props.children) {
+          props.children = Array.isArray(element.props.children) ?
+            element.props.children.map(child => convertToClassName(child)) :
+            convertToClassName(element.props.children);
         }
+
+        return React.cloneElement(element, props);
+      }
+      else {
+        return element;
+      }
     };
 
     const displayName = `${propName}(${getDisplayName(WrappedComponent)})`;
